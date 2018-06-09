@@ -4,6 +4,8 @@
 # import glob
 # import subprocess
 import axelrod as axl
+#requires changes to game.py; zero_determinant.py; memoryone.py
+#working changes to individual strategies
 
 print("hello world")
 
