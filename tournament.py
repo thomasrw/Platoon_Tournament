@@ -6,7 +6,8 @@
 import axelrod as axl
 import itertools
 #requires changes to game.py; zero_determinant.py; memoryone.py
-#working changes to individual strategies
+#working changes to individual strategies not required
+#resolving dependencies required installing some older software versions
 
 print("hello world")
 
@@ -22,15 +23,21 @@ print("hello world")
 axl.seed(0)  # Set a seed
 players = [s() for s in axl.demo_strategies]  # Create players
 #players = [axl.Cooperator(), axl.Defector(), axl.Random(0.5), axl.TitForTat(), axl.Grudger()]
-myplayers = [x for x in itertools.combinations_with_replacement(axl.demo_strategies, 5)]
+#myplayers = [x for x in itertools.combinations_with_replacement(axl.demo_strategies, 10)]
+c = itertools.combinations_with_replacement(axl.demo_strategies, 100)
+counter = sum( 1 for _ in c)
+print(counter)
 
+#TODO use counter with itertools.islice to setup each comibination of players
+myplayers = itertools.combinations_with_replacement(axl.demo_strategies, 100)
 
 print(players)
 #print(axl.demo_strategies)
-print(myplayers)
-print(len(myplayers))
+#print(myplayers)
 
-playthis = [y() for y in myplayers[0]]
+
+#playthis = [y() for y in myplayers[0]]
+playthis = [y() for y in next(myplayers)]
 print(playthis)
 
 
