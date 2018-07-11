@@ -37,8 +37,14 @@ print(players)
 
 
 #playthis = [y() for y in myplayers[0]]
-playthis = [y() for y in next(myplayers)]
-print(playthis)
+
+for z in range(1):
+    playthis = [y() for y in next(myplayers)]
+    print(playthis)
+    tournament = axl.Tournament(playthis)
+    results = tournament.play()
+    print(results.ranked_names)
+
 
 
 '''
