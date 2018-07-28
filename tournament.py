@@ -46,17 +46,22 @@ print(players)
 file_prefix = "/home/thomasrw/Desktop/"
 #f = open(file_prefix + 'run1', 'w')
 
-
+playthis = []
 for z in range(2):
     playthis = [y() for y in next(myplayers)]
-    #print(playthis)
+    print(playthis)
     tournament = axl.Tournament(playthis, turns=10)
     results = tournament.play(filename=file_prefix + 'run' + str(z+1))
     print(results.ranked_names)
+    #TODO open file for writing players pickle
+    pickle.dump(playthis, tournament.filename + '_players')
 
 #TODO reconstitute result_set object from file generated previously by tournament.play()
-
-
+#TODO read file to build list of players
+print("break break")
+myfile = file_prefix + 'run2'
+secondresults = axl.ResultSet(myfile, players=playthis, repetitions=10)
+print(secondresults.ranked_names)
 
 '''
 tournament = axl.Tournament(players)  # Create a tournament
