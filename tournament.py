@@ -38,30 +38,55 @@ myplayers = itertools.combinations_with_replacement(axl.demo_strategies, 50)
 
 print(players)
 #print(axl.demo_strategies)
-#print(myplayers)
+print(myplayers)
 
 
 #playthis = [y() for y in myplayers[0]]
 
 file_prefix = "/home/thomasrw/Desktop/"
-#f = open(file_prefix + 'run1', 'w')
+#fk = open(file_prefix + 'run-players', 'w')
+
+pickle_file = file_prefix + 'players'
 
 playthis = []
-for z in range(2):
+#playthis[0] = []
+counter = 0
+
+def instance_file(input,f):
+    with open(f, 'wb') as handle:
+        pickle.dump(input, handle)
+    #return input()
+
+for z in range(1):
     playthis = [y() for y in next(myplayers)]
-    print(playthis)
+    instance_file(playthis, pickle_file + '-run' + str(z+1))
     tournament = axl.Tournament(playthis, turns=10)
     results = tournament.play(filename=file_prefix + 'run' + str(z+1))
     print(results.ranked_names)
+    counter = counter + 1
+    print(counter)
     #TODO open file for writing players pickle
-    pickle.dump(playthis, tournament.filename + '_players')
+    #pickle.dumps(playthis, fk)
 
 #TODO reconstitute result_set object from file generated previously by tournament.play()
 #TODO read file to build list of players
 print("break break")
-myfile = file_prefix + 'run2'
-secondresults = axl.ResultSet(myfile, players=playthis, repetitions=10)
+
+#fk.close()
+
+with open(pickle_file + '-run1', 'rb') as handle:
+    played = pickle.load(handle)
+
+print(played)
+
+#played2 = [p() for p in played]
+
+myfile = file_prefix + 'run1'
+print(counter)
+secondresults = axl.ResultSet(myfile, players=played, repetitions=10)
 print(secondresults.ranked_names)
+
+
 
 '''
 tournament = axl.Tournament(players)  # Create a tournament
