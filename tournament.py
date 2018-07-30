@@ -43,7 +43,7 @@ print(myplayers)
 
 #playthis = [y() for y in myplayers[0]]
 
-file_prefix = "/home/thomasrw/Desktop/"
+file_prefix = "/home/thomasrw/Desktop/platoon_tournament_results/"
 #fk = open(file_prefix + 'run-players', 'w')
 
 pickle_file = file_prefix + 'players'
@@ -57,19 +57,25 @@ def instance_file(input,f):
         pickle.dump(input, handle)
     #return input()
 
-for z in range(1):
+#316251
+
+#skip function - put in number of last completed run
+spacer = 0
+for z in range(400):
+    next(myplayers)
+    spacer += 1
+
+#put in number of runs to work
+for z in range(3600):
     playthis = [y() for y in next(myplayers)]
-    instance_file(playthis, pickle_file + '-run' + str(z+1))
+    instance_file(playthis, pickle_file + '-run' + str(z+spacer+1))
     tournament = axl.Tournament(playthis, turns=10)
-    results = tournament.play(filename=file_prefix + 'run' + str(z+1))
+    results = tournament.play(filename=file_prefix + 'run' + str(z+spacer+1))
     print(results.ranked_names)
-    counter = counter + 1
-    print(counter)
-    #TODO open file for writing players pickle
-    #pickle.dumps(playthis, fk)
+
 
 #TODO reconstitute result_set object from file generated previously by tournament.play()
-#TODO read file to build list of players
+
 print("break break")
 
 #fk.close()
