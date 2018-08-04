@@ -22,8 +22,8 @@ def recover_results(p,r):
     return secondresults
 
 #TODO determine key data to capture
-#Max score by Strategy
-#Game[] where Strategy_max achieved
+#Max score by Strategy ... done
+#Game[] where Strategy_max achieved ... done
 #Max system score (cumulative of all strategies)
 #Game[] where System_max achieved
 #Total victor overall
@@ -40,18 +40,21 @@ def get_avg_score(results, player_num):
 strategies = [s() for s in axl.demo_strategies]
 #[Cooperator, Defector, Tit For Tat, Grudger, Random: 0.5]
 Max_Strategy_Scores = [0,0,0,0,0]
-Best_Runs = [-1, -1, -1, -1, -1]
+#Best_Runs = [-1, -1, -1, -1, -1]
+Best_Runs = [[] for x in range(5)]
 
 #Max_Defector_Score = 0
 #Max_Grudger_Score = 0
 #Max_TitForTat_Score = 0
 Max_Cooperator_Score = 0
 #Max_Random_Score = 0
-
+Run = 0
 
 def update_max_scores(results):
     global Max_Strategy_Scores
+    global Best_Runs
     global strategies
+    global Run
     for z in range(results.players.__len__()):
         #print(results.players[z])
         for y in range(len(strategies)):
@@ -60,8 +63,11 @@ def update_max_scores(results):
                 if c > Max_Strategy_Scores[y]:
                     Max_Strategy_Scores[y] = c
                     # TODO reset best run list and add run that the max score was achieved in
+                    list = [Run]
+                    Best_Runs[y] = list
                 elif c == Max_Strategy_Scores[y]:
                     print("test")
+                    Best_Runs[y].append(Run)
 
                     #TODO append run to list of runs that max score was achieved in
 
@@ -80,6 +86,7 @@ def update_max(results):
 
 print("Goliath online")
 
+'''
 results = recover_results(file_path,2)
 print(results.ranked_names)
 print(results.players)
@@ -101,9 +108,11 @@ print(strategies)
 update_max_scores(results)
 print(Max_Strategy_Scores)
 update_max_scores(results)
+'''
 
 for x in range(10):
-    update_max_scores(recover_results(file_path,x+1))
+    Run = x+1
+    update_max_scores(recover_results(file_path,Run))
 print(strategies)
 print(Max_Strategy_Scores)
 print(Best_Runs)
