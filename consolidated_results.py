@@ -39,6 +39,7 @@ def recover_results(p,r):
 #normalized score by strategy eg sum score of 200 / 10 instances = 20 per instance --save for moran tourney
 #Game[] where normalized max achieved --save for moran tourney
 
+#TODO functions to store interim results that can be expanded later
 #TODO iterate over results capturing key data
 
 
