@@ -13,7 +13,7 @@ players = players + players + players + players + players + players + players + 
 
 
 
-mp = axl.MoranProcess(players)
+mp = axl.MoranProcess(players, turns=10)
 
 print("let the games begin")
 populations = mp.play()
