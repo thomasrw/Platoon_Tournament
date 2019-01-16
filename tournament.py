@@ -43,7 +43,10 @@ print(myplayers)
 
 #playthis = [y() for y in myplayers[0]]
 
-file_prefix = "/home/thomasrw/Desktop/platoon_tournament_results/"
+#file_prefix = "/home/thomasrw/Desktop/platoon_tournament_results/"
+file_prefix = "/media/thomasrw/passport drive/tournament1/"
+
+
 #fk = open(file_prefix + 'run-players', 'w')
 
 pickle_file = file_prefix + 'players'
@@ -58,15 +61,16 @@ def instance_file(input,f):
     #return input()
 
 #316251
+#desktop started processing at 200,001
 
 #skip function - put in number of last completed run
 spacer = 0
-for z in range(400):
+for z in range(247000):
     next(myplayers)
     spacer += 1
 
 #put in number of runs to work
-for z in range(3600):
+for z in range(69251):
     playthis = [y() for y in next(myplayers)]
     instance_file(playthis, pickle_file + '-run' + str(z+spacer+1))
     tournament = axl.Tournament(playthis, turns=10)
@@ -80,14 +84,15 @@ print("break break")
 
 #fk.close()
 
-with open(pickle_file + '-run1', 'rb') as handle:
+
+with open(pickle_file + '-run7001', 'rb') as handle:
     played = pickle.load(handle)
 
 print(played)
 
 #played2 = [p() for p in played]
 
-myfile = file_prefix + 'run1'
+myfile = file_prefix + 'run7001'
 print(counter)
 secondresults = axl.ResultSet(myfile, players=played, repetitions=10)
 print(secondresults.ranked_names)
